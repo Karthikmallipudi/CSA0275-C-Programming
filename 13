@@ -1,0 +1,38 @@
+#include <stdio.h>
+
+int max(int a, int b) {
+    return a > b ? a : b;
+}
+
+int min(int a, int b) {
+    return a < b ? a : b;
+}
+
+int maxSubarrayProduct(int arr[], int n) {
+    if (n == 0) {
+        return 0;
+    }
+
+    int maxEndingHere = arr[0]; 
+    int minEndingHere = arr[0]; 
+    int maxSoFar = arr[0];      
+    for (int i = 1; i < n; i++) {
+        int temp = maxEndingHere;
+        maxEndingHere = max(arr[i], max(arr[i] * maxEndingHere, arr[i] * minEndingHere));
+        minEndingHere = min(arr[i], min(arr[i] * temp, arr[i] * minEndingHere));
+
+        maxSoFar = max(maxSoFar, maxEndingHere);
+    }
+
+    return maxSoFar;
+}
+
+int main() {
+    int arr[] = {2, 3, -2, 4}; 
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    int maxProduct = maxSubarrayProduct(arr, n);
+    printf("Maximum subarray product: %d\n", maxProduct);
+
+    return 0;
+}
