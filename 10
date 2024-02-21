@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int max(int a, int b) {
+    return (a > b) ? a : b;
+}
+
+int findMaxLength(int *nums, int numsSize) {
+
+    int *hashmap = (int *)malloc((2 * numsSize + 1) * sizeof(int));
+    for (int i = 0; i < 2 * numsSize + 1; i++) {
+        hashmap[i] = -2; // Initialize with an invalid index
+    }
+    
+    int max_length = 0;
+    int count = 0;
+    for (int i = 0; i < numsSize; i++) {
+        count += (nums[i] == 0) ? -1 : 1;
+
+        if (count == 0) {
+        
+            max_length = i + 1;
+        } else if (hashmap[count + numsSize] != -2) {
+ 
+            max_length = max(max_length, i - hashmap[count + numsSize]);
+        } else {
+        
+            hashmap[count + numsSize] = i;
+        }
+    }
+
+    free(hashmap);
+    return max_length;
+}
+
+int main() {
+    int nums[] = {0, 1, 0, 1, 1, 1, 0};
+    int numsSize = sizeof(nums) / sizeof(nums[0]);
+
+    int max_length = findMaxLength(nums, numsSize);
+    printf("Longest subarray with equal number of 0s and 1s: %d\n", max_length);
+
+    return 0;
+}
