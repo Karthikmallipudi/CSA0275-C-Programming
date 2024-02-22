@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <string.h>
+
+void reverseString(char *str) 
+{
+  
+    int length = strlen(str);
+
+    char *start = str;
+    char *end = str + length - 1;
+
+    while (start < end) 
+	{
+    
+        char temp = *start;
+        *start = *end;
+        *end = temp;
+
+        start++;
+        end--;
+    }
+}
+
+int main() {
+ 
+    int maxLength = 100;
+
+
+    char inputString[maxLength];
+
+    printf("Enter a string: ");
+    fgets(inputString, maxLength, stdin);
+
+    inputString[strcspn(inputString, "\n")] = '\0';
+
+    reverseString(inputString);
+
+    printf("Reversed string: %s\n", inputString);
+
+    return 0;
+}
