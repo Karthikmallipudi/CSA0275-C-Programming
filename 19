@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <string.h>
+
+int countOccurrences(char *str, char target) {
+    int count = 0;
+
+ 
+    while (*str != '\0') {
+      
+        if (*str == target) {
+            count++;
+        }
+
+      
+        str++;
+    }
+
+    return count;
+}
+
+int main() {
+ 
+    int maxLength = 100;
+
+    char inputString[maxLength];
+
+    char targetChar;
+
+    printf("Enter a string: ");
+    fgets(inputString, maxLength, stdin);
+
+    inputString[strcspn(inputString, "\n")] = '\0';
+
+    printf("Enter the character to count: ");
+    scanf(" %c", &targetChar);
+
+    int occurrences = countOccurrences(inputString, targetChar);
+
+    printf("Occurrences of '%c' in the string: %d\n", targetChar, occurrences);
+
+    return 0;
+}
