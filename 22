@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+void calculateFactorial(int num, unsigned long long *result) {
+    *result = 1;
+
+    for (int i = 1; i <= num; ++i) {
+        *result *= i;
+    }
+}
+
+int main() {
+    int number;
+    printf("Enter a number: ");
+    scanf("%d", &number);
+
+    if (number < 0) {
+        printf("Factorial is not defined for negative numbers.\n");
+        return 1; 
+    }
+
+    unsigned long long factorial;
+    calculateFactorial(number, &factorial);
+
+    printf("Factorial of %d = %llu\n", number, factorial);
+
+    return 0;
+}
