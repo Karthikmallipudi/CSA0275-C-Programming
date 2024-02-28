@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+int sumEvenNumbers(int start, int end) {
+   
+    if (start > end) {
+        return 0;
+    }
+
+    if (start % 2 == 0) {
+        return start + sumEvenNumbers(start + 2, end);
+    } else {
+ 
+        return sumEvenNumbers(start + 1, end);
+    }
+}
+
+int main() {
+
+    int start, end;
+
+    printf("Enter the starting number: ");
+    scanf("%d", &start);
+
+    printf("Enter the ending number: ");
+    scanf("%d", &end);
+
+    int result = sumEvenNumbers(start, end);
+
+    printf("Sum of even numbers from %d to %d is: %d\n", start, end, result);
+
+    return 0;
+}
