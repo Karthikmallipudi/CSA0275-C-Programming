@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+int countWays(int targetSum, int numbers[], int size) {
+   
+    if (targetSum == 0) {
+        return 1;
+    }
+
+    if (targetSum < 0 || size == 0) {
+        return 0;
+    }
+
+    int withCurrentNumber = countWays(targetSum - numbers[0], numbers, size);
+
+    int withoutCurrentNumber = countWays(targetSum, numbers + 1, size - 1);
+
+    return withCurrentNumber + withoutCurrentNumber;
+}
+
+int main() {
+    int targetSum;
+    int numbers[] = {1, 2, 3};
+    int size = sizeof(numbers) / sizeof(numbers[0]);
+
+    printf("Enter the target sum: ");
+    scanf("%d", &targetSum);
+
+    int ways = countWays(targetSum, numbers, size);
+    printf("Number of ways to reach the target sum %d is: %d\n", targetSum, ways);
+
+    return 0;
+}
