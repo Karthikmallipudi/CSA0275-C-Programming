@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+int evenFibonacciSum(int limit, int prev, int current, int sum) {
+  
+    if (current > limit) {
+        return sum;
+    }
+
+    if (current % 2 == 0) {
+        sum += current;
+    }
+
+    return evenFibonacciSum(limit, current, prev + current, sum);
+}
+
+int main() {
+    int limit;
+
+    printf("Enter the limit for Fibonacci numbers: ");
+    scanf("%d", &limit);
+
+    if (limit < 2) {
+        printf("Please enter a limit greater than or equal to 2.\n");
+        return 1;
+    }
+
+    int sum = evenFibonacciSum(limit, 0, 1, 0);
+    printf("Sum of even Fibonacci numbers up to %d is: %d\n", limit, sum);
+
+    return 0;
+}
